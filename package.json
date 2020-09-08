@@ -1,0 +1,28 @@
+{
+  "name": "CMS-Employee-Tracker",
+  "version": "0.0.1",
+  "description": "<h1 align=center>Employee Tracker</h1>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BR3NDAN-L8N/CMS-Employee-Tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BR3NDAN-L8N/CMS-Employee-Tracker/issues"
+  },
+  "homepage": "https://github.com/BR3NDAN-L8N/CMS-Employee-Tracker#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "express": "^4.17.1",
+    "inquirer": "^7.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
