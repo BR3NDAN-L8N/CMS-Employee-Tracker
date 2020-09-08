@@ -12,7 +12,7 @@ var connection = mysql.createConnection({
     user: "root",
 
     // Your password
-    password: secret.password,
+    password: secret,
     database: "Employees_DB"
 });
 
@@ -38,7 +38,7 @@ function run() {
             ]
         })
         .then(function (answer) {
-            const choice = answer.action.split(' ');
+            const choice = answer.action.toLowerCase().split(' ');
             if (choice[0] === 'view') {
                 viewTable(choice[1]);
             } else if (choice[0] === 'add') {
@@ -48,4 +48,14 @@ function run() {
             }
         });
             
+}
+
+
+function viewTable(tableName) {
+    const query = `SELECT * FROM Employees_DB.${tableName}`;
+
+    connection.query(query, function (err, res) {
+        console.log(res);
+        run();
+    });
 }
