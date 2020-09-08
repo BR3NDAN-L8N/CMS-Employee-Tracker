@@ -1,4 +1,4 @@
-<h1 align=center>ReadMe Generator</h1>
+<h1 align=center>Employee Tracker</h1>
 
   <span align=center>[![License][mit]][mit-url]</span>
   
@@ -27,17 +27,18 @@
   
   ## Project Demo
   
-  [Watch Demo On YouTube](https://www.youtube.com/watch?v=60zCvlJ45mw)
+  [No Demo At This Time]()
 
   ## Built With
 
   NPM:
   * Inquirer
-  * Axios
+  * Console.Table
+  * 
 
   # Usage
 
-  To create a well written ReadMe with ease. 
+  A Content Management System allowing CRUD operations for a company's emplyees.  
 
   # License
   
@@ -72,7 +73,7 @@
   
   
   # Acknowledgements
-  NPM, Inquirer, Axios, Google
+  NPM, Inquirer, Console.Table, Google
   
   
 [mit]: https://img.shields.io/badge/License-The%20MIT%20License-blue
