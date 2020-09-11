@@ -64,21 +64,19 @@ function viewTable(tableName) {
 }
 
 
-function determineTableQuery(tableName) {
+async function determineTableQuery(tableName) {
     console.log(`ran function, determineTableQuery(${tableName})`);
-    return new Promise((resolve, reject) => {
-        if (tableName === "employees") {
-            const values = getNewEmployeeData();
-            const params = `'first_name', 'last_name', 'role_id', 'manager_id'`;
-            return values, params;
-        } else if (tableName === "departments") {
-            const values = getNewDepartmentData();
-        } else {
-            const values = getNewRoleData();
-        }
-        resolve(query = `INSERT INTO Employees_DB.${tableName} (${params}) VALUES(${values})`);
-        console.log('query from determineTableQuery() resolves as such,', query);
-    });
+    let values, params;
+    if (tableName === "employees") {
+        values = await getNewEmployeeData();
+        params = `first_name, last_name, role_id, manager_id`;
+    } else if (tableName === "departments") {
+        values = getNewDepartmentData();
+    } else {
+        values = getNewRoleData();
+    }
+    return query = `INSERT INTO Employees_DB.${tableName} (${params}) VALUES(${values})`;
+    // console.log('query ===', query);
 
 }
 
@@ -94,7 +92,7 @@ async function addToTable(tableName) {
     const query = await determineTableQuery(tableName);
     const run = await runQuery(query);
     run;
-    
+
 }
 
 function getAllDepartments() {
@@ -120,6 +118,32 @@ function getAllDepartments() {
     });
 }
 
+function getAllManagers() {
+
+    return new Promise((resolve, reject) => {
+
+        connection.query(`SELECT * FROM Employees_DB.employees`, function (err, res) {
+            const managerList = res.filter(function (employee) {
+                return employee.role_id == 1;
+            });
+            const mappedManagerList = managerList.map(({ first_name, last_name, id }) => ({
+                name: `${first_name} ${last_name}`,
+                value: id
+            }));
+
+            inquirer.prompt([{
+                type: "list",
+                name: "managerName",
+                message: "pick a manager",
+                choices: mappedManagerList
+            }]).then(function (data) {
+                console.log('manager ID selected, ', data.managerName);
+                resolve(data.managerName);
+            })
+        });
+    });
+}
+
 async function getNewEmployeeData() {
 
     answer = await inquirer.prompt([
@@ -129,7 +153,7 @@ async function getNewEmployeeData() {
             name: "firstName",
             validate: function (input) {
                 str = input.toString();
-                if (str.length < 1) {
+                if (str.length < 3) {
                     return "You must enter a first name";
                 }
                 return true;
@@ -141,7 +165,7 @@ async function getNewEmployeeData() {
             name: "lastName",
             validate: function (input) {
                 str = input.toString();
-                if (str.length < 1) {
+                if (str.length < 3) {
                     return "You must enter a last name";
                 }
                 return true;
@@ -149,9 +173,15 @@ async function getNewEmployeeData() {
         },
     ]);
 
-    return employeeData = getAllDepartments().then((roleID) => {
-        console.log(`The string of values being returned from getNewEmployeeData() '${answer.firstName}', '${answer.lastName}', '${roleID}'`);
-        return `'${answer.firstName}', '${answer.lastName}', '${roleID}'`;
+    const roleID = await getAllDepartments();
+    return managerID = await getAllManagers().then(function (managerID) {
+        return `'${answer.firstName}', '${answer.lastName}', '${roleID}', '${managerID}'`;
     });
+
+
+    //     return employeeData = getAllDepartments().then((roleID) => {
+    //         console.log(`The string of values being returned from getNewEmployeeData() '${answer.firstName}', '${answer.lastName}', '${roleID}'`);
+    //         return `'${answer.firstName}', '${answer.lastName}', '${roleID}'`;
+    // });
 
 }
