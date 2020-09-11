@@ -48,7 +48,7 @@ function run() {
             } else if (choice[0] === 'update') {
                 updateRole();
             } else {
-                console.log(`The answers, ${choice}, weren't recognized`);
+                console.log(`The answers, ${choice}, were not recognized`);
             }
         });
 
@@ -128,9 +128,9 @@ function getAllManagers() {
             });
             const mappedManagerList = managerList.map(({ first_name, last_name, id }) => ({
                 name: `${first_name} ${last_name}`,
-                value: id
+                value: `${id}`
             }));
-
+            mappedManagerList.splice(0, 0, {name: 'None', value: null});
             inquirer.prompt([{
                 type: "list",
                 name: "managerName",
@@ -175,7 +175,7 @@ async function getNewEmployeeData() {
 
     const roleID = await getAllDepartments();
     return managerID = await getAllManagers().then(function (managerID) {
-        return `'${answer.firstName}', '${answer.lastName}', '${roleID}', '${managerID}'`;
+        return `'${answer.firstName}', '${answer.lastName}', '${roleID}', ${managerID}`;
     });
 
 
