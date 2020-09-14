@@ -13,7 +13,3 @@ SQL.connection.connect(function (err) {
 function run() {
     VIEW.mainMenu();
 }
-
-module.exports = {
-    run
-};

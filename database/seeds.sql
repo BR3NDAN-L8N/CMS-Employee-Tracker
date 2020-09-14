@@ -11,8 +11,7 @@ INSERT INTO departments (name) VALUES ('Legal');
 INSERT INTO roles (title, salary, department_id) VALUES ('Sales Manager', '50000', '1');
 INSERT INTO roles (title, salary, department_id) VALUES ('Sales Associate', '30000', '1');
 INSERT INTO roles (title, salary, department_id) VALUES ('CFO', '120000', '2');
-INSERT INTO roles (title, salary, department_id) VALUES ('
-Accountant', '80000', '2');
+INSERT INTO roles (title, salary, department_id) VALUES ('Accountant', '80000', '2');
 INSERT INTO roles (title, salary, department_id) VALUES ('HR Rep', '50000', '3');
 INSERT INTO roles (title, salary, department_id) VALUES ('Tech Lead', '110000', '4');
 INSERT INTO roles (title, salary, department_id) VALUES ('Front-end Developer', '55000', '4');
